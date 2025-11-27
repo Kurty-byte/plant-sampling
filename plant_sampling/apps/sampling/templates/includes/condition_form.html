@@ -1,0 +1,41 @@
+<!-- Add Environmental Conditions -->
+<div class="form-section">
+    <h3>Environmental Conditions</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label>Temperature (°C) *</label>
+            <input type="number" step="0.1" id="condition_temperature" required>
+        </div>
+        <div class="form-group">
+            <label>Humidity (%) *</label>
+            <input type="number" step="0.1" id="condition_humidity" required>
+        </div>
+        <div class="form-group">
+            <label>Altitude (m) *</label>
+            <input type="number" step="0.1" id="condition_altitude" required>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group">
+            <label>Soil pH *</label>
+            <input type="number" step="0.1" id="condition_ph" required>
+        </div>
+        <div class="form-group">
+            <label>Soil Type *</label>
+            <select id="condition_soil_type" required>
+                <option value="">-- Select --</option>
+                <option value="clay">Clay</option>
+                <option value="sandy">Sandy</option>
+                <option value="loamy">Loamy</option>
+                <option value="silty">Silty</option>
+                <option value="peaty">Peaty</option>
+                <option value="chalky">Chalky</option>
+                <option value="saline">Saline</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Soil Nutrients (JSON format)</label>
+        <textarea id="condition_nutrients" placeholder='{"nitrogen": 20, "phosphorus": 15, "potassium": 18}'></textarea>
+    </div>
+</div>

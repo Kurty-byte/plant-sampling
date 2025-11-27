@@ -1,0 +1,155 @@
+<!-- UPDATE TAB -->
+<div id="update" class="tab-content">
+    <div class="content-header">
+        <h2>Update Sample by ID</h2>
+        <p class="tab-description">Enter a sample ID and click "Load Sample" to populate the form with current data, then make your changes.</p>
+    </div>
+    <div class="form-section">
+        <form id="updateForm">
+            <div class="form-group">
+                <label>Sample ID *</label>
+                <input type="number" name="sample_id" required>
+            </div>
+
+            <!-- Update Type Dropdown -->
+            <div class="form-group">
+                <label>Update Type *</label>
+                <select name="update_type" id="updateType" required>
+                    <option value="">Select Update Type</option>
+                    <option value="full_sample">Update Full Sample Data</option>
+                    <option value="growth_metrics">Update Growth Metrics Only</option>
+                </select>
+            </div>
+
+            <!-- Full Sample Update Fields -->
+            <div id="fullSampleFields" class="update-fields" style="display: none;">
+                <!-- Sample Form -->
+                <div class="form-section">
+                    <h3>Plant Sample</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Species Name *</label>
+                            <input type="text" id="update_sample_species" name="species" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Common Name *</label>
+                            <input type="text" id="update_sample_common_name" name="common_name" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Sampling Date *</label>
+                            <input type="date" id="update_sample_date" name="sampling_date" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Location ID *</label>
+                            <input type="number" id="update_sample_location" name="location" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="update_sample_description" name="description" placeholder="Additional notes about the sample"></textarea>
+                    </div>
+                </div>
+
+                <!-- Condition Form -->
+                <div class="form-section">
+                    <h3>Environmental Conditions</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Temperature (°C) *</label>
+                            <input type="number" step="0.1" id="update_condition_temperature" name="temperature" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Humidity (%) *</label>
+                            <input type="number" step="0.1" id="update_condition_humidity" name="humidity" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Altitude (m) *</label>
+                            <input type="number" step="0.1" id="update_condition_altitude" name="altitude" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Soil pH *</label>
+                            <input type="number" step="0.1" id="update_condition_ph" name="soil_ph" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Soil Type *</label>
+                            <select id="update_condition_soil_type" name="soil_type" required>
+                                <option value="">-- Select --</option>
+                                <option value="clay">Clay</option>
+                                <option value="sandy">Sandy</option>
+                                <option value="loamy">Loamy</option>
+                                <option value="silty">Silty</option>
+                                <option value="peaty">Peaty</option>
+                                <option value="chalky">Chalky</option>
+                                <option value="saline">Saline</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Soil Nutrients (JSON format)</label>
+                        <textarea id="update_condition_nutrients" name="soil_nutrients" placeholder='{"nitrogen": 20, "phosphorus": 15, "potassium": 18}'></textarea>
+                    </div>
+                </div>
+
+                <!-- Link Form -->
+                <div class="form-section">
+                    <h3>Link Researcher to Sample</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Researcher ID *</label>
+                            <input type="number" id="update_link_researcher" name="researcher_id" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Role</label>
+                            <select id="update_link_role" name="researcher_role">
+                                <option value="">-- Select --</option>
+                                <option value="lead_researcher">Lead Researcher</option>
+                                <option value="assistant_researcher">Assistant Researcher</option>
+                                <option value="field_technician">Field Technician</option>
+                                <option value="data_analyst">Data Analyst</option>
+                                <option value="supervisor">Supervisor</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Growth Metrics Update Fields -->
+            <div id="growthMetricsFields" class="update-fields" style="display: none;">
+                <h3>Growth Metrics</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Height (meters)</label>
+                        <input type="number" step="0.01" name="height" placeholder="e.g., 2.5">
+                    </div>
+                    <div class="form-group">
+                        <label>Leaf Count</label>
+                        <input type="number" name="leaf_count" placeholder="e.g., 45">
+                    </div>
+                    <div class="form-group">
+                        <label>Stem Diameter (meters)</label>
+                        <input type="number" step="0.001" name="stem_diameter" placeholder="e.g., 0.05">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Health Status</label>
+                    <select name="health_status">
+                        <option value="">Select Health Status</option>
+                        <option value="excellent">Excellent</option>
+                        <option value="good">Good</option>
+                        <option value="fair">Fair</option>
+                        <option value="poor">Poor</option>
+                        <option value="critical">Critical</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="button" id="loadSampleBtn" class="btn btn-primary">Load Sample</button>
+            <button type="submit" id="updateSampleBtn" class="btn btn-primary" style="display: none;">Update Sample</button>
+            <div id="updateResponse" class="response-box"></div>
+        </form>
+    </div>
+</div>

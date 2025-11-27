@@ -1,0 +1,140 @@
+// Plant Sampling Database Schema - DBML Format
+
+// Enums for standardized values
+enum site_type {
+  "forest"
+  "grassland"
+  "wetland"
+  "desert"
+  "agricultural"
+  "urban"
+  "coastal"
+  "mountain"
+}
+
+enum soil_type {
+  "clay"
+  "sandy"
+  "loamy"
+  "silty"
+  "peaty"
+  "chalky"
+  "saline"
+}
+
+enum health_status {
+  "excellent"
+  "good"
+  "fair"
+  "poor"
+  "critical"
+}
+
+enum researcher_role {
+  "lead_researcher"
+  "assistant_researcher"
+  "field_technician"
+  "data_analyst"
+  "supervisor"
+}
+
+// TABLE: sampling_location
+Table sampling_location {
+  location_id int [pk]
+  location_data json [not null, note: 'Contains coordinates, region, country, site_type']
+  created_at timestamp
+
+  indexes {
+    location_data
+  }
+}
+
+// TABLE: environmental_conditions
+Table environmental_conditions {
+  condition_id int [pk]
+  condition_data json [not null, note: 'Contains soil_composition, temperature, humidity, altitude']
+  recorded_at timestamp
+
+  indexes {
+    condition_data
+  }
+}
+
+// TABLE: researcher_info
+Table researcher_info {
+  researcher_id int [pk]
+  name varchar(255) [not null]
+  email varchar(254) [not null, unique]
+  phone varchar(50)
+  affiliation varchar(255)
+  created_at timestamp
+
+  indexes {
+    name
+    email
+  }
+}
+
+// TABLE: plant_sample
+Table plant_sample {
+  sample_id int [pk]
+  sample_detail json [not null, note: 'Contains sampling_date, species, common_name, description']
+  location_id int [not null]
+  condition_id int [not null]
+  created_at timestamp
+  updated_at timestamp
+
+  indexes {
+    sample_detail
+    location_id
+    condition_id
+  }
+}
+
+// TABLE: sample_researchers
+Table sample_researchers {
+  id int [pk]
+  sample_id int [not null]
+  researcher_id int [not null]
+  role varchar(100) [note: 'Researcher role in this sample']
+  assigned_at timestamp
+
+  indexes {
+    sample_id
+    researcher_id
+    (sample_id, researcher_id)
+  }
+}
+
+// TABLE: growth_metrics
+Table growth_metrics {
+  growth_id int [pk]
+  sample_id int [not null]
+  height decimal(10,2) [note: 'Height in meters (0-200)']
+  leaf_count int [note: 'Number of leaves (0-100000)']
+  stem_diameter decimal(10,2) [note: 'Stem diameter in meters (0-50)']
+  health_status varchar(50) [note: 'Overall health assessment']
+  measured_at timestamp
+
+  indexes {
+    sample_id
+    measured_at
+    health_status
+  }
+}
+
+// TABLE: sample_audit_log
+Table sample_audit_log {
+  log_id int [pk]
+  sample_id int
+  action varchar(50)
+  performed_at timestamp
+  details json
+}
+
+// Foreign Key Relationships
+Ref: plant_sample.location_id > sampling_location.location_id
+Ref: plant_sample.condition_id > environmental_conditions.condition_id
+Ref: sample_researchers.sample_id > plant_sample.sample_id
+Ref: sample_researchers.researcher_id > researcher_info.researcher_id
+Ref: growth_metrics.sample_id > plant_sample.sample_id

@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="content">
+    <!-- ADD SAMPLING LOCATION TAB -->
+    <div id="add-location" class="tab-content active">
+        <div class="content-header">
+            <h2>Add Sampling Location</h2>
+        </div>
+
+        {% include 'includes/location_form.html' %}
+    </div>
+
+    <!-- ADD RESEARCHER TAB -->
+    <div id="add-researcher" class="tab-content">
+        <div class="content-header">
+            <h2>Add Researcher</h2>
+        </div>
+
+        {% include 'includes/researcher_form.html' %}
+    </div>
+
+    <!-- ADD PLANT SAMPLE TAB -->
+    <div id="add-sample" class="tab-content">
+        <div class="content-header">
+            <h2>Add Plant Sample</h2>
+        </div>
+
+        {% include 'includes/sample_form.html' %}
+        {% include 'includes/condition_form.html' %}
+        {% include 'includes/link_form.html' %}
+
+        <!-- Combined Submit Button -->
+        <div class="form-section">
+            <button type="button" id="combinedSubmitBtn" class="btn btn-primary" style="width: 100%; padding: 16px; font-size: 1.1em; font-weight: 600;">Create Complete Plant Sample</button>
+            <div id="combinedResponse" class="response-box"></div>
+        </div>
+    </div>
+    
+    <!-- QUERY TAB -->
+    <div id="query" class="tab-content">
+        <div class="content-header">
+            <h2>Query Sample by ID</h2>
+        </div>
+        <div class="form-section">
+            <form id="queryForm">
+                <div class="form-group">
+                    <label>Enter Sample ID *</label>
+                    <input type="number" name="sample_id" required placeholder="e.g., 1">
+                </div>
+                <button type="submit" class="btn btn-primary">Search Sample</button>
+            </form>
+            <div id="queryResponse" class="response-box"></div>
+        </div>
+    </div>
+    
+    {% include 'includes/update_form.html' %}
+    
+    <!-- DELETE TAB -->
+    <div id="delete" class="tab-content">
+        <div class="content-header">
+            <h2>Delete Sample by ID</h2>
+        </div>
+        <div class="form-section">
+            <form id="deleteForm">
+                <div class="form-group">
+                    <label>Enter Sample ID *</label>
+                    <input type="number" name="sample_id" required>
+                </div>
+                
+                <!-- Delete Type Selection -->
+                <div class="form-group">
+                    <label>Delete Type *</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="delete_type" value="soft" checked>
+                            <span class="radio-text">Soft Delete (Recommended)</span>
+                            <small class="radio-description">Data is preserved and can be recovered</small>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="delete_type" value="hard">
+                            <span class="radio-text">Hard Delete (Permanent)</span>
+                            <small class="radio-description">Data is permanently removed from database</small>
+                        </label>
+                    </div>
+                </div>
+                
+                <div id="softDeleteWarning" class="warning-box" style="display: block;">
+                    <strong>Note:</strong> Soft delete preserves all data but marks the sample as deleted.
+                </div>
+                
+                <div id="hardDeleteWarning" class="warning-box danger" style="display: none;">
+                    <strong>WARNING:</strong> Hard delete permanently removes all data from the database. This action <strong>CANNOT</strong> be undone!
+                </div>
+                
+                <button type="submit" id="deleteButton" class="btn btn-warning">Soft Delete Sample</button>
+                <div id="deleteResponse" class="response-box"></div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

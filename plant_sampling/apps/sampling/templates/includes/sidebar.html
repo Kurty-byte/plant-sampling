@@ -1,0 +1,23 @@
+<!-- Sidebar Navigation -->
+<div class="sidebar">
+    <div class="header">
+        <h1>Plant Sampling</h1>
+        <p>Sample Management System</p>
+    </div>
+    
+    <div class="nav-tabs">
+        <div class="nav-dropdown">
+            <button class="nav-tab active dropdown-toggle" onclick="toggleDropdown()">
+                Add Data <span class="dropdown-arrow">▼</span>
+            </button>
+            <div class="dropdown-menu" id="addDataDropdown">
+                <button class="dropdown-item" onclick="showAddTab('location')">Add Sampling Location</button>
+                <button class="dropdown-item" onclick="showAddTab('researcher')">Add Researcher</button>
+                <button class="dropdown-item" onclick="showAddTab('sample')">Add Plant Sample</button>
+            </div>
+        </div>
+        <button class="nav-tab" onclick="showTab('query')">Query by ID</button>
+        <button class="nav-tab" onclick="showTab('update')">Update by ID</button>
+        <button class="nav-tab" onclick="showTab('delete')">Delete by ID</button>
+    </div>
+</div>

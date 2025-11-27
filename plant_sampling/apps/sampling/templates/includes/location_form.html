@@ -1,0 +1,42 @@
+<!-- Add Location -->
+<div class="form-section">
+    <h3>1. Add Sampling Location</h3>
+    <form id="locationForm">
+        <div class="form-row">
+            <div class="form-group">
+                <label>Latitude *</label>
+                <input type="number" step="0.000001" name="latitude" required>
+            </div>
+            <div class="form-group">
+                <label>Longitude *</label>
+                <input type="number" step="0.000001" name="longitude" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Region *</label>
+                <input type="text" name="region" required>
+            </div>
+            <div class="form-group">
+                <label>Country *</label>
+                <input type="text" name="country" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Site Type</label>
+            <select name="site_type">
+                <option value="">-- Select --</option>
+                <option value="forest">Forest</option>
+                <option value="grassland">Grassland</option>
+                <option value="wetland">Wetland</option>
+                <option value="desert">Desert</option>
+                <option value="agricultural">Agricultural</option>
+                <option value="urban">Urban</option>
+                <option value="coastal">Coastal</option>
+                <option value="mountain">Mountain</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Location</button>
+        <div id="locationResponse" class="response-box"></div>
+    </form>
+</div>
